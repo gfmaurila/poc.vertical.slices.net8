@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>c64751a5-1a74-4e41-91d9-966741fc09f0</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  </PropertyGroup>
+
+  <ItemGroup>
+	  <PackageReference Include="Ardalis.Result" Version="7.0.0" />
+	  <PackageReference Include="AutoMapper" Version="12.0.1" />
+	  <PackageReference Include="Carter" Version="8.0.0" />
+	  <PackageReference Include="FluentValidation" Version="11.9.0" />
+	  <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.9.0" />
+	  <PackageReference Include="MediatR" Version="12.2.0" />
+	  <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="5.0.0" />
+	  <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.0.0" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.3" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.3">
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		  <PrivateAssets>all</PrivateAssets>
+	  </PackageReference>
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.3" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.3">
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		  <PrivateAssets>all</PrivateAssets>
+	  </PackageReference>
+	  <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.6" />
+	  <PackageReference Include="Serilog" Version="3.1.1" />
+	  <PackageReference Include="Serilog.AspNetCore" Version="8.0.1" />
+	  <PackageReference Include="Serilog.Sinks.ColoredConsole" Version="3.0.1" />
+	  <PackageReference Include="Serilog.Sinks.MongoDB" Version="5.4.1" />
+	  <PackageReference Include="Swashbuckle.AspNetCore.Newtonsoft" Version="6.5.0" />
+	  <PackageReference Include="poc.core.api.net8" Version="1.0.0" />
+	  <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Extensions\" />
+    <Folder Include="Endpoints\" />
+  </ItemGroup>
+
+</Project>

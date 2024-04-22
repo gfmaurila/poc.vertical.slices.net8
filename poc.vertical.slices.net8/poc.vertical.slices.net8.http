@@ -1,0 +1,6 @@
+@poc.vertical.slices.net8_HostAddress = http://localhost:5115
+
+GET {{poc.vertical.slices.net8_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
