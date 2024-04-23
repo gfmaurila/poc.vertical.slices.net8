@@ -1,5 +1,4 @@
 ﻿using Ardalis.Result;
-using Carter;
 using FluentValidation;
 using MediatR;
 using poc.core.api.net8;
@@ -53,7 +52,7 @@ public static class CreateArticle
                 }).ToList());
 
             var article = new Article
-            { 
+            {
                 Title = request.Title,
                 Description = request.Description,
                 Tags = request.Tags,
@@ -63,22 +62,6 @@ public static class CreateArticle
             _dbContext.Add(article);
             await _dbContext.SaveChangesAsync(cancellationToken);
             return Result.Success(new ArticleResponse(article.Id), "Registro cadastrado");
-        }
-    }
-
-    public class EndPoint : ICarterModule
-    {
-        // 13:35
-        public void AddRoutes(IEndpointRouteBuilder app)
-        {
-            app.MapPost("api/articles", async (Command command, ISender sender) => {
-                var result = await sender.Send(command);
-
-                if (!result.IsSuccess)
-                    return Results.BadRequest(result.Errors);
-
-                return Results.Ok(result.Value);
-            });
         }
     }
 }

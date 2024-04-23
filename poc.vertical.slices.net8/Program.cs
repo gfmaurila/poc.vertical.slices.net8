@@ -2,7 +2,6 @@ using Carter;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using poc.vertical.slices.net8.Database;
-using poc.vertical.slices.net8.Feature.Articles;
 
 var builder = WebApplication.CreateBuilder(args);
 
