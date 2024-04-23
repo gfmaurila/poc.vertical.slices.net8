@@ -6,7 +6,7 @@ using poc.vertical.slices.net8.Contracts;
 using poc.vertical.slices.net8.Database;
 
 namespace poc.vertical.slices.net8.Feature.Articles;
-public static class GetArticle
+public static class GetArticleById
 {
     public class Query : IRequest<Result<ArticleResponse>>
     {

@@ -1,23 +1,32 @@
-#See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
-
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
-USER app
 WORKDIR /app
-EXPOSE 8080
-EXPOSE 8081
+EXPOSE 5075
+
+ENV ASPNETCORE_URLS=http://+:5075
+ENV DOTNET_NOLOGO=true
+ENV DOTNET_CLI_TELEMETRY_OPTOUT=true
+
+RUN adduser -u 5678 --disabled-password --gecos "" appuser && chown -R appuser /app
+USER appuser
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-ARG BUILD_CONFIGURATION=Release
-WORKDIR /src
-COPY ["poc.vertical.slices.net8/poc.vertical.slices.net8.csproj", "poc.vertical.slices.net8/"]
-RUN dotnet restore "./poc.vertical.slices.net8/poc.vertical.slices.net8.csproj"
+WORKDIR /poc.vertical.slices.net8
+
+# Copia o arquivo .csproj para o diret�rio de trabalho atual no cont�iner
+COPY poc.vertical.slices.net8/poc.vertical.slices.net8.csproj .
+
+# Restaura as depend�ncias do projeto
+RUN dotnet restore poc.vertical.slices.net8.csproj
+
+# Copia o restante dos arquivos do projeto para o cont�iner
 COPY . .
-WORKDIR "/src/poc.vertical.slices.net8"
-RUN dotnet build "./poc.vertical.slices.net8.csproj" -c $BUILD_CONFIGURATION -o /app/build
+
+# Define o diret�rio de trabalho e constr�i o projeto
+WORKDIR /poc.vertical.slices.net8
+RUN dotnet build poc.vertical.slices.net8/poc.vertical.slices.net8.csproj -c Release -o /app/build
 
 FROM build AS publish
-ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./poc.vertical.slices.net8.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish poc.vertical.slices.net8/poc.vertical.slices.net8.csproj -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app

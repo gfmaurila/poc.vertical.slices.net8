@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using poc.vertical.slices.net8.Database.Mappings;
 using poc.vertical.slices.net8.Domain;
 
 namespace poc.vertical.slices.net8.Database;
@@ -15,7 +16,8 @@ public class EFSqlServerContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Article>(builder => builder.OwnsOne(a => a.Tags, tagsBuilder => tagsBuilder.ToJson()));
+        modelBuilder.ApplyConfiguration(new ArticleConfiguration());
+        //modelBuilder.Entity<Article>(builder => builder.OwnsOne(a => a.Tags, tagsBuilder => tagsBuilder.ToJson()));
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

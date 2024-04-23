@@ -1,0 +1,54 @@
+version: '3.9'
+# docker-compose up --build
+networks:
+  app-network:
+    driver: bridge
+
+services:
+
+# APIS BEGIN -----------------------------------------------------------------------------
+
+  poc.vertical.slices.net8.webapi:
+    image: ${DOCKER_REGISTRY-}poc.vertical.slices.net8.webapi
+    container_name: poc.vertical.slices.net8.webapi
+    restart: always
+    build:
+      context: .
+      dockerfile: poc.vertical.slices.net8/Dockerfile
+    expose:
+      - 5075
+    ports:
+      - 5075:5075
+    links:
+      - sqlserver
+    networks:
+      - app-network
+    depends_on:
+      - sqlserver
+    
+# APIS END -----------------------------------------------------------------------------
+
+# DB BEGIN -----------------------------------------------------------------------------
+
+  # SQL Server
+  # Add-Migration Inicial -Context SqlServerDb
+  # Update-Database -Context SqlServerDb
+  sqlserver:
+    image: mcr.microsoft.com/azure-sql-edge:latest
+    cap_add: [ 'SYS_PTRACE' ]
+    hostname: mssql
+    container_name: sqlserver
+    restart: always
+    expose:
+      - 1433
+    ports:
+      - 1433:1433
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=@Poc2Minimal@Api
+    networks:
+      - app-network
+      
+
+# DB END -----------------------------------------------------------------------------
+

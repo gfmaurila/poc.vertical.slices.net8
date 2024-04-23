@@ -2,6 +2,7 @@ using Carter;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using poc.vertical.slices.net8.Database;
+using poc.vertical.slices.net8.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,11 +23,12 @@ builder.Services.AddValidatorsFromAssembly(assembly);
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || app.Environment.IsEnvironment("Docker") || app.Environment.IsStaging())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 
 app.MapCarter();
 
@@ -36,5 +38,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+await app.MigrateAsync(); // Aqui faz migrations
 
 app.Run();
