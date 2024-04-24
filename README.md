@@ -15,6 +15,8 @@
 - ![image](https://github.com/gfmaurila/poc.vertical.slices.net8/assets/5544035/1ce7897a-9588-48ad-b2dc-784ed13ea030)
 - ![image](https://github.com/gfmaurila/poc.vertical.slices.net8/assets/5544035/b32fefd6-3e3d-4e64-bb3a-6a86d8f6abaa)
 - ![image](https://github.com/gfmaurila/poc.vertical.slices.net8/assets/5544035/7ad3089e-5f01-471e-b6b5-232e82a3c27f)
+- ![image](https://github.com/gfmaurila/poc.vertical.slices.net8/assets/5544035/558d1b24-1156-459d-881b-f451fc0056f8)
+
 
 
 
