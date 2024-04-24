@@ -11,6 +11,18 @@
 - `Shared/`: Componentes compartilhados como erros e respostas padrão da API.
 - `Program.cs`: Ponto de entrada da aplicação.
 
+## Configuração e Instalação
+
+### Clonando o Repositório
+Clone o repositório usando: https://github.com/gfmaurila/poc.vertical.slices.net8
+
+### Configurando o Docker e Docker Compose
+docker-compose up --build
+http://localhost:5075/swagger/index.html
+
+### SQL Server
+- Add-Migration Inicial -Context EFSqlServerContext
+- Update-Database -Context EFSqlServerContext
 
 ## Youtube
 - ......
