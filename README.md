@@ -1,35 +1,25 @@
-# Estrutura da API
-- ASP.NET Core 8.0: Framework para desenvolvimento da Microsoft.
-- AutoMapper: Biblioteca para realizar mapeamento entre objetos.
-- Swagger UI: Documentação para a API.
-- XUnit
-- FluentValidator
-- MongoDb
-- MediatR
-- Serilog
-- RabbitMQ
-- Kafka
-- Docker & Docker Compose
 
-# Arquitetura
-- CQRS
-- Event Sourcing
-- Repository Pattern
-- Resut Pattern
-- Domain Events
-- ![image](https://github.com/gfmaurila/poc.cqrs.api.core.sqlserver.ef.net8/assets/5544035/d468e5d6-0d4d-40ba-a074-38204bc6a9b3)
-- ![image](https://github.com/gfmaurila/poc.cqrs.api.core.sqlserver.ef.net8/assets/5544035/e3f22b99-ae7c-4361-b6f4-bab7d0951aaa)
-- ![image](https://github.com/gfmaurila/poc.cqrs.api.core.sqlserver.ef.net8/assets/5544035/14fc2aff-7594-4f6d-9d8d-6cd3af2d2011)
+## Estrutura do Projeto
 
+- `Contracts/`: Modelos de dados para requisições e respostas.
+- `Database/`: Configurações de banco de dados e mapeamentos do Entity Framework.
+- `Domain/`: Entidades de domínio.
+- `Endpoints/`: Definições dos endpoints da API.
+- `Extensions/`: Métodos de extensão para configuração e Entity Framework.
+- `Feature/Articles/`: Implementações das funcionalidades relacionadas a artigos.
+- `Migrations/`: Migrações de banco de dados do Entity Framework.
+- `Shared/`: Componentes compartilhados como erros e respostas padrão da API.
+- `Program.cs`: Ponto de entrada da aplicação.
 
+## Contribuindo
 
+Qualquer contribuição será bem-vinda. Para contribuir:
 
-
-## poc.cqrs.api.core.sqlserver.ef.net8
-- API de autenticação para outros serviços. Gerencia tokens e controla o acesso com base nos papéis dos usuários.
-- docker-compose up --build
-- http://localhost:5075/swagger/index.html
-- SQL Server
+1. Faça um Fork do projeto.
+2. Crie uma Branch para sua Feature (`git checkout -b feature/AmazingFeature`).
+3. Adicione suas mudanças (`git commit -m 'Add some AmazingFeature'`).
+4. Envie para a Branch (`git push origin feature/AmazingFeature`).
+5. Abra um Pull Request.
 
 ## Youtube
 - ......
