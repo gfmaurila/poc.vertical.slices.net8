@@ -17,7 +17,6 @@ public class EFSqlServerContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfiguration(new ArticleConfiguration());
-        //modelBuilder.Entity<Article>(builder => builder.OwnsOne(a => a.Tags, tagsBuilder => tagsBuilder.ToJson()));
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
