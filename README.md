@@ -12,6 +12,13 @@
 - `Shared/`: Componentes compartilhados como erros e respostas padrão da API.
 - `Program.cs`: Ponto de entrada da aplicação.
 
+- ![image](https://github.com/gfmaurila/poc.vertical.slices.net8/assets/5544035/1ce7897a-9588-48ad-b2dc-784ed13ea030)
+- ![image](https://github.com/gfmaurila/poc.vertical.slices.net8/assets/5544035/b32fefd6-3e3d-4e64-bb3a-6a86d8f6abaa)
+- ![image](https://github.com/gfmaurila/poc.vertical.slices.net8/assets/5544035/7ad3089e-5f01-471e-b6b5-232e82a3c27f)
+
+
+
+
 ## Configuração e Instalação
 
 ### Clonando o Repositório
