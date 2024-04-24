@@ -1,8 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore;
-using poc.vertical.slices.net8.Extensions;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using poc.vertical.slices.net8.Domain;
-using System.Text.Json;
+using poc.vertical.slices.net8.Extensions;
 
 namespace poc.vertical.slices.net8.Database.Mappings;
 
@@ -21,14 +20,6 @@ public class ArticleConfiguration : IEntityTypeConfiguration<Article>
             .Property(entity => entity.Description)
             .IsRequired() // NOT NULL
             .IsUnicode(false);
-
-        builder.Property(entity => entity.Tags)
-            .IsRequired()
-            .HasConversion(
-                v => JsonSerializer.Serialize(v, (JsonSerializerOptions)null),
-                v => JsonSerializer.Deserialize<List<string>>(v, (JsonSerializerOptions)null))
-            .IsUnicode(false)
-            .HasMaxLength(2048);
 
         builder
             .Property(entity => entity.CreatedOnUtc)

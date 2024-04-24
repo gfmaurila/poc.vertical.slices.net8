@@ -2,7 +2,7 @@
 using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using poc.vertical.slices.net8.Contracts;
+using poc.vertical.slices.net8.Contracts.Article;
 using poc.vertical.slices.net8.Database;
 
 namespace poc.vertical.slices.net8.Feature.Articles;
@@ -31,7 +31,6 @@ public static class GetArticleById
                                                Id = a.Id,
                                                Title = a.Title,
                                                Description = a.Description,
-                                               Tags = a.Tags,
                                                CreatedOnUtc = a.CreatedOnUtc,
                                                PublishedOnUtc = a.PublishedOnUtc
                                            })

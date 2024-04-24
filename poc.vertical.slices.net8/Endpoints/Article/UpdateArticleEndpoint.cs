@@ -1,18 +1,18 @@
 ﻿using Carter;
 using Mapster;
 using MediatR;
-using poc.vertical.slices.net8.Contracts;
+using poc.vertical.slices.net8.Contracts.Article;
 using poc.vertical.slices.net8.Feature.Articles;
 
-namespace poc.vertical.slices.net8.Endpoints;
-public class CreateArticleEndpoint : ICarterModule
+namespace poc.vertical.slices.net8.Endpoints.Article;
+public class UpdateArticleEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapPost("api/articles", async (CreateArticleRequest request, ISender sender) =>
+        app.MapPut("api/articles", async (UpdateArticleRequest request, ISender sender) =>
         {
 
-            var command = request.Adapt<CreateArticle.Command>();
+            var command = request.Adapt<UpdateArticle.Command>();
 
             var result = await sender.Send(command);
 

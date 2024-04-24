@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.OpenApi.Models;
 using poc.vertical.slices.net8.Database;
-using System.Reflection;
 
 namespace poc.vertical.slices.net8.Extensions;
 

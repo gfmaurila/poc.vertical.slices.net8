@@ -1,15 +1,16 @@
 ﻿using Ardalis.Result;
 using FluentValidation;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using poc.core.api.net8;
 using poc.vertical.slices.net8.Database;
-using poc.vertical.slices.net8.Domain;
 
 namespace poc.vertical.slices.net8.Feature.Articles;
-public static class CreateArticle
+public static class UpdateArticle
 {
     public class Command : IRequest<Result<ArticleResponse>>
     {
+        public Guid Id { get; set; }
         public string Title { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public List<string> Tags { get; set; } = new();
@@ -51,16 +52,19 @@ public static class CreateArticle
                     ErrorMessage = e.ErrorMessage
                 }).ToList());
 
-            var article = new Article
-            {
-                Title = request.Title,
-                Description = request.Description,
-                CreatedOnUtc = DateTime.UtcNow,
-            };
+            var article = await _dbContext.Article
+                                           .Where(a => a.Id == request.Id)
+                                           .FirstOrDefaultAsync(cancellationToken);
 
-            _dbContext.Add(article);
+            if (article is null)
+                return Result.Error("Id não encontrado");
+
+            article.Title = request.Title;
+            article.Description = request.Description;
+
+            _dbContext.Entry(article).State = EntityState.Modified;
             await _dbContext.SaveChangesAsync(cancellationToken);
-            return Result.Success(new ArticleResponse(article.Id), "Registro cadastrado");
+            return Result.Success(new ArticleResponse(article.Id), "Registro alterado");
         }
     }
 }
