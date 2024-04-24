@@ -10,10 +10,10 @@ RUN adduser -u 5678 --disabled-password --gecos "" appuser && chown -R appuser /
 USER appuser
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-WORKDIR /poc.vertical.slices.net8
+WORKDIR /src
 
 # Copia o arquivo .csproj para o diret�rio de trabalho atual no cont�iner
-COPY poc.vertical.slices.net8/poc.vertical.slices.net8.csproj .
+COPY src/poc.vertical.slices.net8.csproj .
 
 # Restaura as depend�ncias do projeto
 RUN dotnet restore poc.vertical.slices.net8.csproj
@@ -22,11 +22,11 @@ RUN dotnet restore poc.vertical.slices.net8.csproj
 COPY . .
 
 # Define o diret�rio de trabalho e constr�i o projeto
-WORKDIR /poc.vertical.slices.net8
-RUN dotnet build poc.vertical.slices.net8/poc.vertical.slices.net8.csproj -c Release -o /app/build
+WORKDIR /src
+RUN dotnet build src/poc.vertical.slices.net8.csproj -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish poc.vertical.slices.net8/poc.vertical.slices.net8.csproj -c Release -o /app/publish
+RUN dotnet publish src/poc.vertical.slices.net8.csproj -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app

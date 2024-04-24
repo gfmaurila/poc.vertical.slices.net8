@@ -14,18 +14,25 @@ services:
     restart: always
     build:
       context: .
-      dockerfile: poc.vertical.slices.net8/Dockerfile
+      dockerfile: src/Dockerfile
     expose:
       - 5075
     ports:
       - 5075:5075
     links:
       - sqlserver
+      # - oracle
+      - mongoserver
+      - kafka
+      - rabbitmq
     networks:
       - app-network
     depends_on:
       - sqlserver
-    
+      - mongoserver
+      - kafka
+      - rabbitmq
+
 # APIS END -----------------------------------------------------------------------------
 
 # DB BEGIN -----------------------------------------------------------------------------
@@ -48,7 +55,91 @@ services:
       - SA_PASSWORD=@Poc2Minimal@Api
     networks:
       - app-network
-      
+
+
+  # Redis Cache Server
+  redis:
+    image: redis:latest
+    container_name: redis
+    command: redis-server --requirepass Poc2Minimal@Api
+    restart: always
+    expose:
+      - 6379
+    ports:
+      - 6379:6379
+    networks:
+      - app-network
+
+  mongoserver:
+    image: mongo:latest
+    container_name: mongoserver
+    restart: always
+    expose:
+      - 27017
+    ports:
+      - 27017:27017
+    networks:
+      - app-network
 
 # DB END -----------------------------------------------------------------------------
 
+# WORKER BEGIN -----------------------------------------------------------------------------
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    restart: always
+    networks: 
+      - app-network
+    ports:
+      - 2181:2181
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+  
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    restart: always
+    networks: 
+      - app-network
+    depends_on:
+      - zookeeper
+    ports:
+      - 9092:9092
+      - 29092:29092
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
+  # http://localhost:9000    
+  kafdrop:
+    image: obsidiandynamics/kafdrop
+    container_name: kafdrop
+    restart: always
+    ports:
+      - "9000:9000"  # Porta que o Kafdrop ficará acessível
+    environment:
+      KAFKA_BROKERCONNECT: "kafka:29092"  # Endereço do broker Kafka, ajuste conforme necessário
+      JVM_OPTS: "-Xms32M -Xmx64M"  # Configurações de JVM, ajuste conforme suas necessidades
+      SERVER_SERVLET_CONTEXTPATH: "/"  # Contexto raiz do Kafdrop
+    depends_on:
+      - kafka  # Garante que o Kafka esteja pronto antes de iniciar o Kafdrop
+    networks:
+      - app-network   
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: 'rabbitmq'
+    restart: always
+    ports:
+        - 5672:5672
+        - 15672:15672
+    volumes:
+        - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+        - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+    networks:
+        - app-network
+
+# WORKER END ----------------------------------------------------------------------------- 
