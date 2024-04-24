@@ -1,5 +1,5 @@
 
-## API C# com Arquitetura de Vertical Slice
+## API C# com Arquitetura Vertical Slice
 ## Estrutura do Projeto
 
 - `Contracts/`: Modelos de dados para requisições e respostas.
