@@ -1,0 +1,11 @@
+
+// Atualizar EF
+dotnet tool update --global dotnet-ef
+
+
+
+// SQL Server Core
+Add-Migration Inicial -Context EFContext
+
+Update-Database -Context EFContext
+

@@ -1,0 +1,16 @@
+version: '3.9'
+
+services:
+
+  api.admin.webapi:
+    ports:
+      - 5061:5061
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+      # - ASPNETCORE_ENVIRONMENT=Test
+    volumes:
+      - ~/.aspnet/https:/root/.aspnet/https:ro
+      - ~/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
+
+
+

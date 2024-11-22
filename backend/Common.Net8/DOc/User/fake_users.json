@@ -1,0 +1,58 @@
+// Inserir dados falsos
+            migrationBuilder.InsertData(
+                table: "User",
+                columns: new[] {"Id", "FirstName", "LastName", "Gender", "DateOfBirth", "Email", "Password", "RoleUserAuth", "Notification", "Phone" },
+                values: new object[]
+                {
+                    Guid.NewGuid(), "Guilherme", "Figueiras Maurila - 1", EGender.Male.ToString(), new DateTime(1986, 03, 18), "gfmaurila@gmail.com", Password.ComputeSha256Hash("@C23l10a1985"),
+                    JsonSerializer.Serialize(new List<string>
+                    {
+                        ERoleUserAuth.USER.ToString(),
+                        ERoleUserAuth.CREATE_USER.ToString(),
+                        ERoleUserAuth.UPDATE_USER.ToString(),
+                        ERoleUserAuth.DELETE_USER.ToString(),
+                        ERoleUserAuth.GET_USER.ToString(),
+                        ERoleUserAuth.GET_BY_ID_USER.ToString(),
+
+                        ERoleUserAuth.NOTIFICATION.ToString(),
+                        ERoleUserAuth.CREATE_NOTIFICATION.ToString(),
+                        ERoleUserAuth.DELETE_NOTIFICATION.ToString(),
+                        ERoleUserAuth.GET_NOTIFICATION.ToString(),
+                    }, (JsonSerializerOptions)null),
+                    "WhatsApp", 
+                    "51985623312"
+                }
+            );
+
+            // Inserir dados falsos
+            migrationBuilder.InsertData(
+                table: "User",
+                columns: new[] { "Id", "FirstName", "LastName", "Gender", "DateOfBirth", "Email", "Password", "RoleUserAuth", "Notification", "Phone" },
+                values: new object[]
+                {
+                    Guid.NewGuid(), "Guilherme", "Figueiras Maurila - 2", EGender.Male.ToString(), new DateTime(1986, 03, 18), "gfmaurila@hotmail.com", Password.ComputeSha256Hash("@C23l10a1985"),
+                    JsonSerializer.Serialize(new List<string>
+                    {
+                        ERoleUserAuth.USER.ToString(),
+                        ERoleUserAuth.NOTIFICATION.ToString(),
+                    }, (JsonSerializerOptions)null),
+                    "SMS",
+                    "51985623355"
+                }
+            );
+
+            migrationBuilder.InsertData(
+                table: "User",
+                columns: new[] { "Id", "FirstName", "LastName", "Gender", "DateOfBirth", "Email", "Password", "RoleUserAuth", "Notification", "Phone" },
+                values: new object[]
+                {
+                    Guid.NewGuid(), "Clarisse", "Maurila", EGender.Female.ToString(), new DateTime(1973, 08, 05), "clarisse.maurila@gmail.com", Password.ComputeSha256Hash("@C23l10a1985"),
+                    JsonSerializer.Serialize(new List<string>
+                    {
+                        ERoleUserAuth.GET_USER.ToString(),
+                        ERoleUserAuth.GET_NOTIFICATION.ToString(),
+                    }, (JsonSerializerOptions)null),
+                    "Email",
+                    "51985623300"
+                }
+            );
